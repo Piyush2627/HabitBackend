@@ -1,20 +1,18 @@
 import mongoose from 'mongoose';
 
 const habitSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  frequency: { type: Number, required: true },
+  title: { type: String },
+  frequency: { type: Number },
   duration: { type: Number },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user' },
   description: { type: String },
-  createdAt: { type: Date, default: Date.now },
-  completed: { type: Number, default: 0 },
-  deleted: { type: Boolean, default: false },
-  deletedAt: { type: Date },
-  lastCompletedAt: { type: Date },
-  nextDueAt: { type: Date },
-  lastUpdatedAt: { type: Date },
-  lastCompletedDuration: { type: Number },
-  updatedAt: { type: Date },
+  completed: { type: Number },
+  completedDates: [
+    {
+      dates: { type: Date },
+      isSkipped: { type: Boolean, default: false },
+      status: { type: Boolean, default: false },
+    },
+  ],
 });
 
 export default mongoose.model('Habit', habitSchema);
